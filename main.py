@@ -4,11 +4,11 @@ import mysql.connector
 import os
 
 conn_obj=mysql.connector.connect(
-    host="mysql-2856dd90-bandlaharshini13-ad06.l.aivencloud.com",
-    database="defaultdb",
-    user="avnadmin",
-    password=os.getenv("DB_PASSWORD"),
-    port=15244
+    host=os.getenv("db_host"),
+    database=os.getenv("db_name"),
+    user=os.getenv("db_user"),
+    password=os.getenv("db_password"),
+    port=os.getenv("db_port")
 )
 cursor_obj=conn_obj.cursor(dictionary=True)
 
