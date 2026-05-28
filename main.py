@@ -13,14 +13,15 @@ app.add_middleware(
     allow_headers=["*"],   
 )
 
-conn_obj = mysql.connector.connect(
-    host=os.getenv("DB_HOST"),
-    database=os.getenv("DB_NAME"),
-    user=os.getenv("DB_USER"),
-    password=os.getenv("DB_PASSWORD"),
-    port=int(os.getenv("DB_PORT")),
-    ssl_disabled=False
-)
+def get_connection():
+    return mysql.connector.connect(
+        host=os.getenv("DB_HOST"),
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        port=int(os.getenv("DB_PORT")),
+        ssl_disabled=False
+    )
  
 print(os.getenv("DB_HOST"))
 print(os.getenv("DB_NAME"))
