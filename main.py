@@ -3,15 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import mysql.connector
 import os
 
-conn_obj=mysql.connector.connect(
-    host=os.getenv("db_host"),
-    database=os.getenv("db_name"),
-    user=os.getenv("db_user"),
-    password=os.getenv("db_password"),
-    port=os.getenv("db_port")
-)
-cursor_obj=conn_obj.cursor(dictionary=True)
-
 app=FastAPI()
 
 app.add_middleware(
@@ -21,6 +12,23 @@ app.add_middleware(
     allow_methods=["*"],   
     allow_headers=["*"],   
 )
+
+conn_obj = mysql.connector.connect(
+    host=os.getenv("DB_HOST"),
+    database=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    port=int(os.getenv("DB_PORT")),
+    ssl_verify_cert=False
+)
+ 
+print(os.getenv("DB_HOST"))
+print(os.getenv("DB_NAME"))
+print(os.getenv("DB_USER"))
+print(os.getenv("DB_PORT"))
+
+cursor_obj=conn_obj.cursor(dictionary=True)
+
 
 create_table_query = """
 CREATE TABLE IF NOT EXISTS expenses(
@@ -40,6 +48,14 @@ CREATE TABLE IF NOT EXISTS expenses(
 
 cursor_obj.execute(create_table_query)
 conn_obj.commit()
+
+@app.get("/")
+def home():
+
+    return {
+        "message":
+        "Expense Tracker API Running Successfully"
+    }
 
 #  Add Expense 
 @app.post("/add_expense")

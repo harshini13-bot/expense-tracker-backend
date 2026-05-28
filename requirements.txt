@@ -1,9 +1,0 @@
-streamlit
-requests
-pandas
-matplotlib
-fastapi
-uvicorn
-mysql-connector-python
-python-multipart
-
