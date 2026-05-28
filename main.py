@@ -19,7 +19,7 @@ conn_obj = mysql.connector.connect(
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),
     port=int(os.getenv("DB_PORT")),
-    ssl_verify_cert=False
+    ssl_disabled=False
 )
  
 print(os.getenv("DB_HOST"))
