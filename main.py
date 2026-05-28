@@ -8,9 +8,7 @@ conn_obj=mysql.connector.connect(
     database="defaultdb",
     user="avnadmin",
     password=os.getenv("DB_PASSWORD"),
-    port=15244,
-    auth_plugin="mysql_native_password",
-    ssl_disabled=False
+    port=15244
 )
 cursor_obj=conn_obj.cursor(dictionary=True)
 
